@@ -1,10 +1,13 @@
 package com.springboot.rest.entity;
 
 import javax.persistence.Column;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name="user")
@@ -15,8 +18,10 @@ public class User {
 	private Long id;
 	
 	@Column(name="username", length=50, nullable=false, unique=true)
+	@NotEmpty(message="Username must not be empty. Please provide the username.")
 	private String username;
 	
+	@Size(min=2,message="Firstname must have atleast 2 characters.")
 	@Column(name="firstname", length=50, nullable=false)
 	private String firstname;
 	
