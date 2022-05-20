@@ -35,4 +35,10 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 		ErrorDetails errorDetails = new ErrorDetails(new Date(),ex.getMessage(),request.getDescription(false),"ER003");
 		return new ResponseEntity<>(errorDetails,HttpStatus.BAD_REQUEST);
 	}
+	
+	@ExceptionHandler(OrderNotFoundException.class)
+	public final ResponseEntity<Object> handleOrderNotFoundException(OrderNotFoundException ex, WebRequest request){
+		ErrorDetails errorDetails = new ErrorDetails(new Date(),ex.getMessage(),request.getDescription(false),"ER004");
+		return new ResponseEntity<>(errorDetails,HttpStatus.NOT_FOUND);
+	}
 }

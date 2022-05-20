@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -29,12 +30,13 @@ import com.springboot.rest.service.UserService;
 
 @RestController
 @Validated
+@RequestMapping(value="/users")
 public class UserController {
 	
 	@Autowired
 	private UserService userService;
 	
-	@GetMapping("/users")
+	@GetMapping
 	public List<User> getAllUsers() {
 		List<User> users= userService.getAllUsers();
 		return users;
@@ -52,7 +54,7 @@ public class UserController {
 		}
 	}
 	
-	@GetMapping("/users/{id}")
+	@GetMapping("/{id}")
 	public Optional<User> getUserById(@PathVariable("id") @Min(1) Long id) {
 		try {
 			return userService.getUserById(id);
@@ -80,7 +82,7 @@ public class UserController {
 		}
 	}
 	
-	@GetMapping("/users/byname/{username}")
+	@GetMapping("/byname/{username}")
 	public User getUserByUsername(@PathVariable("username") String username) throws UserNameNotFoundException{
 		User user = userService.getUserByUsername(username);
 		if (user == null) {
