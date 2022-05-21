@@ -41,25 +41,6 @@ public class OrderServiceImpl implements OrderService {
 	}
 	
 	public Order getOrderById(Long userid, Long orderId) throws OrderNotFoundException {
-//		Optional<User> userTemp = userRepository.findById(userid);
-//		if (!userTemp.isPresent()) {
-//			throw new UserNotFoundException("User not found in our records.");
-//		}
-//		List<Order> orders = userTemp.get().getOrders();
-//		Order orderFound = null;
-//		for(Order order:orders) {
-//			if (order.getOrderId().equals(orderId)) { 
-//				System.out.println(order.getOrderId() + " " + orderId);
-//				orderFound=order; 
-//				break;
-//			} 
-//		}
-//		if (orderFound==null) {
-//			throw new OrderNotFoundException("Order not found in our records.");
-//		}
-//		return orderFound;
-		
 		return orderRepository.findByUserIdAndOrderId(userid, orderId);
-		
 	}
 }
