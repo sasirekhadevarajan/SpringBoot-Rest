@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.springboot.rest.dto.UserMmDto;
 import com.springboot.rest.entity.User;
 import com.springboot.rest.exception.UserExistsException;
 import com.springboot.rest.exception.UserNameNotFoundException;
@@ -89,5 +90,14 @@ public class UserController {
 			throw new UserNameNotFoundException("Username not found in out records.");
 		}
 		return user;
+	}
+	
+	@GetMapping("/modelmapper/{id}")
+	public UserMmDto getUserByIdUsingMm(@PathVariable("id") @Min(1) Long id) {
+		try {
+			return userService.getUserByIdUsingMm(id);
+		} catch(UserNotFoundException ex) {
+			throw new ResponseStatusException(HttpStatus.NOT_FOUND,ex.getMessage());
+		}
 	}
 }
